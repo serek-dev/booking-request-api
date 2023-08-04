@@ -1,0 +1,39 @@
+version: "3.4"
+services:
+  public_booking_linting:
+    container_name: public_booking_linting
+    build:
+      context: .
+      target: linting
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+
+  public_booking_tests_unit:
+    container_name: public_booking_tests_unit
+    build:
+      context: .
+      target: tests_unit
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+
+  public_booking_tests_e2e:
+    container_name: public_booking_tests_e2e
+    build:
+      context: .
+      target: tests_e2e
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+
+  public_booking_dev:
+    container_name: public_booking_dev
+    build:
+      context: .
+      target: dev
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - "4200:80"
