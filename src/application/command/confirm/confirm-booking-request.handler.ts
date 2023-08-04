@@ -2,7 +2,6 @@ import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { BookingRepository } from "../../../domain/booking.repository";
 import { firstValueFrom } from "rxjs";
 import { Inject } from "@nestjs/common";
-import { BookingRequestFactory } from "../../../domain/booking-request.factory";
 import { IEventBus } from "../event.bus";
 import { ConfirmBookingRequestCommand } from "./confirm-booking-request.command";
 
@@ -12,7 +11,6 @@ export class ConfirmBookingRequestHandler
 {
   constructor(
     @Inject("BookingRepository") private readonly repo: BookingRepository,
-    private readonly factory: BookingRequestFactory,
     @Inject("IEventBus") private readonly eventBus: IEventBus
   ) {}
 

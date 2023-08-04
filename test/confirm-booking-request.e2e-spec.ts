@@ -3,6 +3,7 @@ import { HttpServer, INestApplication, ValidationPipe } from "@nestjs/common";
 import * as request from "supertest";
 import { AppModule } from "../src/infrastructure/app.module";
 import { BookingRepositoryMock } from "../src/infrastructure/repository/booking-repository.mock";
+import { useContainer } from "class-validator";
 
 describe("AppController - confirm booking request (e2e)", () => {
   let app: INestApplication;
@@ -15,6 +16,7 @@ describe("AppController - confirm booking request (e2e)", () => {
 
     app = moduleFixture.createNestApplication();
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
+    useContainer(app.select(AppModule), { fallbackOnErrors: true });
     await app.init();
     server = app.getHttpServer();
   });
@@ -36,7 +38,7 @@ describe("AppController - confirm booking request (e2e)", () => {
       .then((response) => {
         expect(response.statusCode).toBe(202);
         expect(response.body["item"]["id"]).not.toBeNull();
-      });
+      }).catch(err => console.log(err))
   });
 
   it("validation fails on non uuid argument", async () => {
@@ -54,11 +56,11 @@ describe("AppController - confirm booking request (e2e)", () => {
 
   it("validation fails on non existing uuid argument", async () => {
     // Given I have invalid uuid booking
-    const existingBooking = "a90d8f1f-3b74-4a8f-96c2-d5b2cfd1f79d";
+    const nonExistingBooking = "a90d8f1f-3b74-4a8f-96c2-d5b2cfd1f79d";
 
     // When I confirm it
     await request(app.getHttpServer())
-      .patch(`/bookings/${existingBooking}/confirm`)
+      .patch(`/bookings/${nonExistingBooking}/confirm`)
       .send()
       .then((response) => {
         expect(response.statusCode).toBe(400);

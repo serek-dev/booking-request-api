@@ -7,11 +7,13 @@ import { BookingRequestFactory } from "../domain/booking-request.factory";
 import { BookingRequestCreatedHandler } from "./event-handler/booking-request-created.handler";
 import { NestAdapterEventBus } from "./bus/nest-adapter-event.bus";
 import { ConfirmBookingRequestHandler } from "../application/command/confirm/confirm-booking-request.handler";
+import { BookingRequestExistsValidator } from "./validator/booking-request-exists.validator";
 
 @Module({
   imports: [CqrsModule],
   controllers: [AppController],
   providers: [
+    BookingRequestExistsValidator,
     CreateBookingRequestHandler,
     BookingRequestFactory,
     BookingRequestCreatedHandler,

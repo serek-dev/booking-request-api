@@ -1,0 +1,28 @@
+version: "3.4"
+services:
+  linting:
+    container_name: linting
+    build:
+      context: .
+      target: linting
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+
+  tests_unit:
+    container_name: tests_unit
+    build:
+      context: .
+      target: tests_unit
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+
+  tests_e2e:
+    container_name: tests_e2e
+    build:
+      context: .
+      target: tests_e2e
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
