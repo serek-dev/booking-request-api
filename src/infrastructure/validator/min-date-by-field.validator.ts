@@ -2,9 +2,9 @@ import {
   ValidationArguments,
   ValidatorConstraint,
   ValidatorConstraintInterface,
-} from 'class-validator';
+} from "class-validator";
 
-@ValidatorConstraint({ name: 'MinDateByField' })
+@ValidatorConstraint({ name: "MinDateByField" })
 export class MinDateByFieldValidator implements ValidatorConstraintInterface {
   constructor(private readonly greaterThanField: string) {}
 
@@ -15,7 +15,7 @@ export class MinDateByFieldValidator implements ValidatorConstraintInterface {
 
   validate(
     value: Date,
-    validationArguments?: ValidationArguments,
+    validationArguments?: ValidationArguments
   ): Promise<boolean> | boolean {
     return value > this.getOtherFieldValue(validationArguments);
   }

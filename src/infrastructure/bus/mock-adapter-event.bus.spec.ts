@@ -1,16 +1,16 @@
-import {Customer} from '../../domain/customer';
-import {Availability} from '../../domain/availability';
-import {Range} from '../../domain/range';
-import {BookingRequest} from '../../domain/booking-request';
-import {MockAdapterEventBus} from './mock-adapter-event.bus';
+import { Customer } from "../../domain/customer";
+import { Availability } from "../../domain/availability";
+import { Range } from "../../domain/range";
+import { BookingRequest } from "../../domain/booking-request";
+import { MockAdapterEventBus } from "./mock-adapter-event.bus";
 
-describe('MockAdapterEventBus', () => {
-  it('should publish event using mock bus', () => {
+describe("MockAdapterEventBus", () => {
+  it("should publish event using mock bus", () => {
     // Given I have a valid Booking Request
     const entity = new BookingRequest(
-      'whatever-i-want',
-      new Customer('fake@email.com', 'Customer-name', 'Doe', 48500355031),
-      new Availability('avail-id', new Range(new Date(2023), new Date(2024))),
+      "whatever-i-want",
+      new Customer("fake@email.com", "Customer-name", "Doe", 48500355031),
+      new Availability("avail-id", new Range(new Date(2023), new Date(2024)))
     );
 
     // And my publisher

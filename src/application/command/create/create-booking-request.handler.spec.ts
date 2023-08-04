@@ -1,16 +1,16 @@
-import {CreateBookingRequestCommand} from './create-booking-request.command';
-import {CreateBookingRequestHandler} from './create-booking-request.handler';
-import {BookingRepositoryMock} from '../../../infrastructure/repository/booking-repository.mock';
-import {BookingRequestFactory} from '../../../domain/booking-request.factory';
-import {MockAdapterEventBus} from '../../../infrastructure/bus/mock-adapter-event.bus';
+import { CreateBookingRequestCommand } from "./create-booking-request.command";
+import { CreateBookingRequestHandler } from "./create-booking-request.handler";
+import { BookingRepositoryMock } from "../../../infrastructure/repository/booking-repository.mock";
+import { BookingRequestFactory } from "../../../domain/booking-request.factory";
+import { MockAdapterEventBus } from "../../../infrastructure/bus/mock-adapter-event.bus";
 
-describe('Create booking request handler', () => {
-  it('should dispatch an event resulting a persisting of booking', async () => {
+describe("Create booking request handler", () => {
+  it("should dispatch an event resulting a persisting of booking", async () => {
     // Given I have a valid command
     const command = new CreateBookingRequestCommand();
-    command.customerFirstName = 'Joe';
-    command.customerEmail = 'joe@doe.com';
-    command.availabilityId = 'avail-id';
+    command.customerFirstName = "Joe";
+    command.customerEmail = "joe@doe.com";
+    command.availabilityId = "avail-id";
     command.availabilityRangeFrom = new Date(2023);
     command.availabilityRangeTo = new Date(2024);
 
@@ -20,7 +20,7 @@ describe('Create booking request handler', () => {
     const sut = new CreateBookingRequestHandler(
       repo,
       new BookingRequestFactory(),
-      eventBus,
+      eventBus
     );
 
     // When I execute it

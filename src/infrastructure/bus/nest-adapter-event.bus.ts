@@ -1,6 +1,6 @@
-import {IEventBus} from '../../application/command/event.bus';
-import {AggregateRoot, EventPublisher} from '@nestjs/cqrs';
-import {Injectable} from '@nestjs/common';
+import { IEventBus } from "../../application/command/event.bus";
+import { AggregateRoot, EventPublisher } from "@nestjs/cqrs";
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class NestAdapterEventBus implements IEventBus {

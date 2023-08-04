@@ -3,6 +3,6 @@ export class Customer {
     public readonly email: string,
     public readonly firstName: string,
     public readonly lastName: string,
-    public readonly phoneNumber: number,
+    public readonly phoneNumber: number
   ) {}
 }

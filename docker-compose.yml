@@ -1,7 +1,7 @@
 version: "3.4"
 services:
-  public_booking_linting:
-    container_name: public_booking_linting
+  linting:
+    container_name: linting
     build:
       context: .
       target: linting
@@ -9,8 +9,8 @@ services:
     volumes:
       - .:/app
 
-  public_booking_tests_unit:
-    container_name: public_booking_tests_unit
+  tests_unit:
+    container_name: tests_unit
     build:
       context: .
       target: tests_unit
@@ -18,8 +18,8 @@ services:
     volumes:
       - .:/app
 
-  public_booking_tests_e2e:
-    container_name: public_booking_tests_e2e
+  tests_e2e:
+    container_name: tests_e2e
     build:
       context: .
       target: tests_e2e
@@ -27,8 +27,8 @@ services:
     volumes:
       - .:/app
 
-  public_booking_dev:
-    container_name: public_booking_dev
+  dev:
+    container_name: dev
     build:
       context: .
       target: dev

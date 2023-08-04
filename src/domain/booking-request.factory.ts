@@ -1,9 +1,9 @@
-import {Customer} from './customer';
-import {Availability} from './availability';
-import {BookingRequest} from './booking-request';
-import {Range} from './range';
-import {CreateBookingRequest} from '../infrastructure/dto/create-booking-request.dto';
-import {Injectable} from '@nestjs/common';
+import { Customer } from "./customer";
+import { Availability } from "./availability";
+import { BookingRequest } from "./booking-request";
+import { Range } from "./range";
+import { CreateBookingRequest } from "../infrastructure/dto/create-booking-request.dto";
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class BookingRequestFactory {
@@ -14,12 +14,12 @@ export class BookingRequestFactory {
         dto.customerEmail,
         dto.customerFirstName,
         dto.customerLastName,
-        dto.customerPhoneNumber,
+        dto.customerPhoneNumber
       ),
       new Availability(
         dto.availabilityId,
-        new Range(dto.availabilityRangeFrom, dto.availabilityRangeTo),
-      ),
+        new Range(dto.availabilityRangeFrom, dto.availabilityRangeTo)
+      )
     );
   }
 }

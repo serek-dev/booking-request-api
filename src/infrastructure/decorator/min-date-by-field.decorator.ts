@@ -1,13 +1,13 @@
-import { registerDecorator, ValidationOptions } from 'class-validator';
-import { MinDateByFieldValidator } from '../validator/min-date-by-field.validator';
+import { registerDecorator, ValidationOptions } from "class-validator";
+import { MinDateByFieldValidator } from "../validator/min-date-by-field.validator";
 
 export function MinDateByField(
   greaterThanField: string,
-  validationOptions?: ValidationOptions,
+  validationOptions?: ValidationOptions
 ) {
   return function (object: any, propertyName: string) {
     registerDecorator({
-      name: 'MinDateByField',
+      name: "MinDateByField",
       target: object.constructor,
       propertyName: propertyName,
       options: validationOptions,

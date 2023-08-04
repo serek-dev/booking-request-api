@@ -1,8 +1,8 @@
-import {Customer} from './customer';
-import {AggregateRoot} from '@nestjs/cqrs';
-import {BookingRequestCreatedEvent} from './event/booking-request-created.event';
-import {Availability} from './availability';
-import {BookingRequestConfirmedEvent} from './event/booking-request-confirmed.event';
+import { Customer } from "./customer";
+import { AggregateRoot } from "@nestjs/cqrs";
+import { BookingRequestCreatedEvent } from "./event/booking-request-created.event";
+import { Availability } from "./availability";
+import { BookingRequestConfirmedEvent } from "./event/booking-request-confirmed.event";
 
 export class BookingRequest extends AggregateRoot {
   private isConfirmed = false;
@@ -10,7 +10,7 @@ export class BookingRequest extends AggregateRoot {
   constructor(
     public readonly id: string,
     public readonly customer: Customer,
-    public readonly availability: Availability,
+    public readonly availability: Availability
   ) {
     super();
     this.apply(
@@ -20,14 +20,14 @@ export class BookingRequest extends AggregateRoot {
         this.customer.firstName,
         this.availability.range.from,
         this.availability.range.to,
-        'Joe Doe', // todo: hardcoded
-      ),
+        "Joe Doe" // todo: hardcoded
+      )
     );
   }
 
   confirm(): void {
     if (this.isConfirmed) {
-      throw new Error('Already confirmed');
+      throw new Error("Already confirmed");
     }
 
     this.isConfirmed = true;
@@ -40,9 +40,9 @@ export class BookingRequest extends AggregateRoot {
         this.customer.lastName,
         this.customer.phoneNumber,
         this.availability.id,
-        'specialist-id', // todo: hardcoded,
-        new Date(),
-      ),
+        "specialist-id", // todo: hardcoded,
+        new Date()
+      )
     );
   }
 }

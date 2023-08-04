@@ -5,6 +5,6 @@ export class BookingRequestCreatedEvent {
     public readonly customerFirstName: string,
     public readonly availabilityRangeFrom: Date,
     public readonly availabilityRangeTo: Date,
-    public readonly specialistName: string,
+    public readonly specialistName: string
   ) {}
 }

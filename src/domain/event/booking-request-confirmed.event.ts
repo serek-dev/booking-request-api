@@ -7,6 +7,6 @@ export class BookingRequestConfirmedEvent {
     public readonly customerPhoneNumber: number,
     public readonly availabilityId: string,
     public readonly specialistId: string,
-    public readonly date: Date,
+    public readonly date: Date
   ) {}
 }

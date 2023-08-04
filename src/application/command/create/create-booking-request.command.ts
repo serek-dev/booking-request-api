@@ -1,7 +1,17 @@
-import {IsDate, IsEmail, IsNotEmpty, IsOptional, IsUUID, Length, Max, Min, MinDate,} from 'class-validator';
-import {Transform} from 'class-transformer';
-import {MinDateByField} from '../../../infrastructure/decorator/min-date-by-field.decorator';
-import {CreateBookingRequest} from '../../../infrastructure/dto/create-booking-request.dto';
+import {
+  IsDate,
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsUUID,
+  Length,
+  Max,
+  Min,
+  MinDate,
+} from "class-validator";
+import { Transform } from "class-transformer";
+import { MinDateByField } from "../../../infrastructure/decorator/min-date-by-field.decorator";
+import { CreateBookingRequest } from "../../../infrastructure/dto/create-booking-request.dto";
 
 export class CreateBookingRequestCommand implements CreateBookingRequest {
   @IsUUID()
@@ -38,7 +48,7 @@ export class CreateBookingRequestCommand implements CreateBookingRequest {
   @IsNotEmpty()
   @IsDate()
   @Transform(({ value }) => value && new Date(value))
-  @MinDateByField('availabilityRangeFrom')
+  @MinDateByField("availabilityRangeFrom")
   availabilityRangeTo: Date;
 
   @IsNotEmpty()

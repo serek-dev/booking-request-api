@@ -1,5 +1,5 @@
-import {BookingRequest} from './booking-request';
-import {Observable} from 'rxjs';
+import { BookingRequest } from "./booking-request";
+import { Observable } from "rxjs";
 
 export interface BookingRepository {
   store(entity: BookingRequest): Observable<void>;
