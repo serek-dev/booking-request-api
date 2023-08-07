@@ -34,6 +34,7 @@ describe("AppController - confirm booking request (e2e)", () => {
     // When I confirm it
     await request(app.getHttpServer())
       .patch(`/bookings/${existingBooking}/confirm`)
+      .set('authorization', 'c7f1b4d8-3561')
       .send()
       .then((response) => {
         expect(response.statusCode).toBe(202);
@@ -48,6 +49,7 @@ describe("AppController - confirm booking request (e2e)", () => {
     // When I confirm it
     await request(app.getHttpServer())
       .patch(`/bookings/${existingBooking}/confirm`)
+      .set('authorization', 'c7f1b4d8-3561')
       .send()
       .then((response) => {
         expect(response.statusCode).toBe(400);
@@ -61,6 +63,7 @@ describe("AppController - confirm booking request (e2e)", () => {
     // When I confirm it
     await request(app.getHttpServer())
       .patch(`/bookings/${nonExistingBooking}/confirm`)
+      .set('authorization', 'c7f1b4d8-3561')
       .send()
       .then((response) => {
         expect(response.statusCode).toBe(400);

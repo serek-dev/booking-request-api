@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
 import { AppController } from "../ui/app.controller";
 import { CqrsModule } from "@nestjs/cqrs";
 import { CreateBookingRequestHandler } from "../application/command/create/create-booking-request.handler";
@@ -8,6 +8,7 @@ import { BookingRequestCreatedHandler } from "./event-handler/booking-request-cr
 import { NestAdapterEventBus } from "./bus/nest-adapter-event.bus";
 import { ConfirmBookingRequestHandler } from "../application/command/confirm/confirm-booking-request.handler";
 import { BookingRequestExistsValidator } from "./validator/booking-request-exists.validator";
+import { AccessKeyMiddleware } from "./middleware/access-key.middleware";
 
 @Module({
   imports: [CqrsModule],
@@ -26,6 +27,14 @@ import { BookingRequestExistsValidator } from "./validator/booking-request-exist
       provide: "IEventBus",
       useClass: NestAdapterEventBus,
     },
+    {
+      provide: "ApiKey",
+      useValue: "c7f1b4d8-3561", // todo: hardcoded
+    },
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AccessKeyMiddleware).forRoutes("*");
+  }
+}

@@ -39,6 +39,7 @@ describe("AppController - create booking request (e2e)", () => {
   it("creates valid Booking Request", () => {
     return request(app.getHttpServer())
       .post("/bookings")
+      .set('authorization', 'c7f1b4d8-3561')
       .send(validRequest)
       .then((response) => {
         expect(response.body["id"]).not.toBeNull();
@@ -52,6 +53,7 @@ describe("AppController - create booking request (e2e)", () => {
       invalidRequest[field] = null;
       request(app.getHttpServer())
         .post("/bookings")
+        .set('authorization', 'c7f1b4d8-3561')
         .send(invalidRequest)
         .expect(400);
     });
@@ -62,6 +64,7 @@ describe("AppController - create booking request (e2e)", () => {
     invalidRequest.availabilityRangeFrom = "2020-01-01T10:05:33";
     return request(app.getHttpServer())
       .post("/bookings")
+      .set('authorization', 'c7f1b4d8-3561')
       .send(invalidRequest)
       .expect(400);
   });
@@ -71,6 +74,7 @@ describe("AppController - create booking request (e2e)", () => {
     invalidRequest.availabilityRangeTo = "2020-01-01T10:05:33";
     return request(app.getHttpServer())
       .post("/bookings")
+      .set('authorization', 'c7f1b4d8-3561')
       .send(invalidRequest)
       .expect(400);
   });
@@ -81,6 +85,7 @@ describe("AppController - create booking request (e2e)", () => {
     invalidRequest.availabilityRangeTo = "2030-01-01T10:05:33";
     return request(app.getHttpServer())
       .post("/bookings")
+      .set('authorization', 'c7f1b4d8-3561')
       .send(invalidRequest)
       .expect(400);
   });
@@ -90,6 +95,7 @@ describe("AppController - create booking request (e2e)", () => {
     invalidRequest.customerPhoneNumber = 500000000 - 1;
     return request(app.getHttpServer())
       .post("/bookings")
+      .set('authorization', 'c7f1b4d8-3561')
       .send(invalidRequest)
       .expect(400);
   });
@@ -99,6 +105,7 @@ describe("AppController - create booking request (e2e)", () => {
     invalidRequest.customerPhoneNumber = 99999999999 + 1;
     return request(app.getHttpServer())
       .post("/bookings")
+      .set('authorization', 'c7f1b4d8-3561')
       .send(invalidRequest)
       .expect(400);
   });
@@ -108,6 +115,7 @@ describe("AppController - create booking request (e2e)", () => {
     invalidRequest.availabilityId = "not-uuid";
     return request(app.getHttpServer())
       .post("/bookings")
+      .set('authorization', 'c7f1b4d8-3561')
       .send(invalidRequest)
       .expect(400);
   });
@@ -117,6 +125,7 @@ describe("AppController - create booking request (e2e)", () => {
     invalidRequest.specialistId = "not-uuid";
     return request(app.getHttpServer())
       .post("/bookings")
+      .set('authorization', 'c7f1b4d8-3561')
       .send(invalidRequest)
       .expect(400);
   });
