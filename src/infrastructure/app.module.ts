@@ -9,9 +9,10 @@ import { NestAdapterEventBus } from "./bus/nest-adapter-event.bus";
 import { ConfirmBookingRequestHandler } from "../application/command/confirm/confirm-booking-request.handler";
 import { BookingRequestExistsValidator } from "./validator/booking-request-exists.validator";
 import { AccessKeyMiddleware } from "./middleware/access-key.middleware";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 
 @Module({
-  imports: [CqrsModule],
+  imports: [CqrsModule, ConfigModule.forRoot()],
   controllers: [AppController],
   providers: [
     BookingRequestExistsValidator,
@@ -29,7 +30,10 @@ import { AccessKeyMiddleware } from "./middleware/access-key.middleware";
     },
     {
       provide: "ApiKey",
-      useValue: "c7f1b4d8-3561", // todo: hardcoded
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
+        return configService.get<string>("API_KEY");
+      },
     },
   ],
 })
